@@ -10,13 +10,12 @@ import com.example.room_reservation_system_api.repository.UserRepository;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
 
-@Service
-public class UserService {
-    private UserRepository userRepository;
+import lombok.RequiredArgsConstructor;
 
-    public UserService(UserRepository userRepository) {
-        userRepository = this.userRepository;
-    }
+@Service
+@RequiredArgsConstructor
+public class UserService {
+    private final UserRepository userRepository;
 
     // FirebaseのidTokenを受け取って、そのidTokenに対応するユーザがデータベースにあれば、それを返し、なければ新しく作って返す
     public User loadOrCreateUser(String idToken) throws FirebaseAuthException {

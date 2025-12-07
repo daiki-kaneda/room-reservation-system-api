@@ -7,13 +7,12 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@Configuration
-public class SecurityConfig {
-    private FirebaseAuthFilter firebaseAuthFilter;
+import lombok.RequiredArgsConstructor;
 
-    public SecurityConfig(FirebaseAuthFilter firebaseAuthFilter){
-        this.firebaseAuthFilter = firebaseAuthFilter;
-    }
+@Configuration
+@RequiredArgsConstructor
+public class SecurityConfig {
+    private final FirebaseAuthFilter firebaseAuthFilter;
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

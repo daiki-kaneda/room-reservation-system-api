@@ -11,15 +11,14 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 
 @Component
+@RequiredArgsConstructor
 public class FirebaseAuthFilter extends OncePerRequestFilter {
 
-    private FirebaseAuthenticationProvider firebaseAuthenticationProvider;
+    private final FirebaseAuthenticationProvider firebaseAuthenticationProvider;
 
-    public FirebaseAuthFilter(FirebaseAuthenticationProvider firebaseAuthenticationProvider){
-        this.firebaseAuthenticationProvider=firebaseAuthenticationProvider;
-    }
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {

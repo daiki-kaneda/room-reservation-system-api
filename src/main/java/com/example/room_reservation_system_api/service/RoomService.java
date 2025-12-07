@@ -7,13 +7,12 @@ import org.springframework.stereotype.Service;
 import com.example.room_reservation_system_api.controller.dto.RoomDataDTO;
 import com.example.room_reservation_system_api.repository.RoomQueryRepository;
 
-@Service
-public class RoomService {
-    private RoomQueryRepository roomQueryRepository;
+import lombok.RequiredArgsConstructor;
 
-    public RoomService(RoomQueryRepository roomQueryRepository) {
-        this.roomQueryRepository = roomQueryRepository;
-    }
+@Service
+@RequiredArgsConstructor
+public class RoomService {
+    private final RoomQueryRepository roomQueryRepository;
 
     public Page<RoomDataDTO> getRoomsByName(String name, Pageable pageable) {
         return roomQueryRepository.findByNameContaining(name, pageable)

@@ -3,6 +3,7 @@ package com.example.room_reservation_system_api.service;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.room_reservation_system_api.driver.FirebaseAuthDriver;
 import com.example.room_reservation_system_api.entity.User;
@@ -13,11 +14,13 @@ import com.google.firebase.auth.FirebaseToken;
 import lombok.RequiredArgsConstructor;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
 
     // FirebaseのidTokenを受け取って、そのidTokenに対応するユーザがデータベースにあれば、それを返し、なければ新しく作って返す
+    @Transactional
     public User loadOrCreateUser(String idToken) throws FirebaseAuthException {
         FirebaseToken token = FirebaseAuthDriver.verifyToken(idToken);
         String uid = token.getUid();
